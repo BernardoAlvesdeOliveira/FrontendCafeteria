@@ -1,0 +1,29 @@
+
+<div id="main" class="bg-black">
+    <div class="flex text-white semi-bold font-mono justify-center p-4">
+        <p [attr.id]="nome">OLÁ USUÁRIO {{ nome }}</p>
+    </div>
+    <div class="flex text-dark semi-bold font-mono justify-center p-4">
+        <button class="bg-blue-300" (click)="submit()">Click</button>
+    </div>
+    <div class="flex text-dark semi-bold font-mono justify-center p-4">
+        <button class="bg-blue-300" (click)="novoTitulo()">titulo</button>
+    </div>
+    <div class="flex text-white semi-bold font-mono justify-center p-4">
+        @if (titulo) {
+            <h1>COM TITULO</h1>
+        } @else if (nome == "Bernardo") {
+            <h1>Bernardo</h1>
+        } @else {
+            <h1>SEM TITULO</h1>
+        }
+    </div>
+    <div class="flex flex-col text-white semi-bold font-mono justify-center p-4">
+        @for (item of lista; track item.nome) {
+            <p>{{ item.nome }}</p>
+        }
+    </div>
+    <div class="flex text-dark semi-bold font-mono justify-center p-4">
+        <button class="bg-blue-300" (click)="enviandoInfo()">Enviando</button>
+    </div>
+</div>
