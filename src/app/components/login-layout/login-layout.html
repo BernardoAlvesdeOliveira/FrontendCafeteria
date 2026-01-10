@@ -1,14 +1,57 @@
-<main>
-    <section>
-        <img src="" alt="">
-        <h2 class="text-slate-900">TITULO</h2>
-        <button>Log In</button>
-        <div><span>or</span></div>
-        <button>Sing Up</button>
-    </section>
+<main class="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-slate-100">
 
-    <section>
-        <img src="" alt="">
-        <h1 class="text-slate-900">TITULO IMG</h1>
-    </section>
+  <!-- Left Section -->
+  <section class="hidden md:flex flex-col justify-center items-center bg-gradient-to-br from-orange-700 to-orange-950 text-white p-12">
+    <img 
+      src="/assets/svg/ilustration.png" 
+      alt="Imagem ilustrativa" 
+      class="w-104 h-96 mb-8 object-contain"
+    />
+  </section>
+
+  <!-- Right Section -->
+   <section class="flex flex-col justify-center items-center px-6 py-12 bg-white shadow-lg">
+    <img 
+      src="/assets/svg/logo.jpg" 
+      alt="Logo" 
+      class="w-48 h-48 mb-6 object-contain"
+    />
+
+    <h2 class="text-2xl font-semibold text-slate-900 mb-6">
+      Acesse sua conta
+    </h2>
+
+    <form class="flex flex-col items-center w-full mb-4">
+        <!-- Login Form -->
+        <div class="w-full max-w-xs">
+            <input 
+                type="email" 
+                placeholder="Email" 
+                class="w-full max-w-xs border border-slate-300 rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+            />
+        </div>
+        <div class="w-full max-w-xs">
+            <input 
+                type="password" 
+                placeholder="Senha" 
+                class="w-full max-w-xs border border-slate-300 rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+            />
+        </div>
+    </form>
+
+    <button class="w-full max-w-xs bg-orange-800 text-white py-2 rounded-lg font-medium hover:bg-orange-950 transition">
+      Entrar
+    </button>
+
+    <div class="flex items-center w-full max-w-xs my-4">
+      <div class="flex-1 h-px bg-slate-300"></div>
+      <span class="px-3 text-sm text-slate-500">ou</span>
+      <div class="flex-1 h-px bg-slate-300"></div>
+    </div>
+
+    <button class="w-full max-w-xs border border-orange-800 text-orange-800 py-2 rounded-lg font-medium hover:bg-blue-50 transition">
+      Cadastre-se
+    </button>
+  </section>
+  
 </main>
