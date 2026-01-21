@@ -1,0 +1,120 @@
+<main
+  class="min-h-screen flex items-center justify-center
+         bg-gradient-to-br from-orange-700 via-orange-800 to-orange-950 px-4"
+>
+  <form
+    [formGroup]="cadastroForm"
+    (ngSubmit)="onSubmit()"
+    class="w-full max-w-md bg-white/95 backdrop-blur
+           p-8 rounded-3xl shadow-2xl space-y-6 enter-container" animate.enter="enter-animation"
+  >
+    <!-- Título -->
+    <div class="text-center space-y-1">
+      <h2 class="text-3xl font-bold text-orange-800">
+        Cadastro
+      </h2>
+      <p class="text-sm text-gray-500">
+        Crie sua conta preenchendo os dados abaixo
+      </p>
+    </div>
+
+    <!-- CPF -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-semibold text-gray-700">CPF</label>
+      <input
+        type="text"
+        formControlName="cpf"
+        placeholder="00000000000"
+        class="input"
+      />
+
+      @if (cadastroForm.get('cpf')?.touched && cadastroForm.get('cpf')?.invalid) {
+        <small class="text-red-500 text-xs">
+          CPF inválido (11 números)
+        </small>
+      }
+    </div>
+
+    <!-- Nome -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-semibold text-gray-700">Nome Completo</label>
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Seu nome completo"
+        class="input"
+      />
+
+      @if (cadastroForm.get('nome')?.touched && cadastroForm.get('nome')?.invalid) {
+        <small class="text-red-500 text-xs">
+          Nome obrigatório
+        </small>
+      }
+    </div>
+
+    <!-- Email -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-semibold text-gray-700">Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="email@exemplo.com"
+        class="input"
+      />
+
+      @if (cadastroForm.get('email')?.touched && cadastroForm.get('email')?.invalid) {
+        <small class="text-red-500 text-xs">
+          Email inválido
+        </small>
+      }
+    </div>
+
+    <!-- Senha -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-semibold text-gray-700">Senha</label>
+      <input
+        type="password"
+        formControlName="senha"
+        placeholder="••••••••"
+        class="input"
+      />
+    </div>
+
+    <!-- Confirmar Senha -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-semibold text-gray-700">
+        Confirmar Senha
+      </label>
+      <input
+        type="password"
+        formControlName="confirmarSenha"
+        placeholder="••••••••"
+        class="input"
+      />
+
+      @if (cadastroForm.errors?.['senhasDiferentes'] && cadastroForm.touched) {
+        <small class="text-red-500 text-xs">
+          As senhas não coincidem
+        </small>
+      }
+    </div>
+
+    <!-- Botão -->
+    @if (mensagemErro) {
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-sm">
+        {{ mensagemErro }}
+      </div>
+    }
+    <button
+      type="submit"
+      [disabled]="cadastroForm.invalid"
+      class="w-full py-3 rounded-xl font-semibold text-white
+             bg-gradient-to-r from-orange-600 to-orange-700
+             hover:from-orange-700 hover:to-orange-800
+             disabled:from-gray-400 disabled:to-gray-400
+             transition-all shadow-lg"
+    >
+      Cadastrar
+    </button>
+  </form>
+</main>

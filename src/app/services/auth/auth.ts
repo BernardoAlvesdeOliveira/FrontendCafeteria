@@ -7,6 +7,13 @@ interface LoginRequest {
   password: string;
 }
 
+interface SingupRequest {
+  cpf: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +26,13 @@ export class AuthService {
   login(data: LoginRequest): Observable<boolean> {
     return this.http.post<boolean>(
       `${this.apiUrl}/user/login`,
+      data
+    );
+  }
+  
+  signUp(data: SingupRequest): Observable<boolean> {
+    return this.http.post<boolean>(
+      `${this.apiUrl}/user/create`,
       data
     );
   }
