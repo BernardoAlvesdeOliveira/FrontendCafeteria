@@ -17,7 +17,7 @@ interface SingupRequest {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthAccount {
 
   private apiUrl = 'http://100.68.183.57:8080';
 
