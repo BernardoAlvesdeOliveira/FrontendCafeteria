@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from '../../services/auth';
+import { AuthService } from '../../services/auth/auth';
+import { RouterLink } from '@angular/router'; 
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
   selector: 'app-login-layout',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule, RouterLink],
   templateUrl: './login-layout.html',
   styleUrl: './login-layout.css',
 })

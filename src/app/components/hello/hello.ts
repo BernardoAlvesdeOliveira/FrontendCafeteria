@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { EnviandoInfomacoes } from '../../services/enviando-infomacoes';
+import { AuthService } from '../../services/auth/auth';
 
 @Component({
   selector: 'app-hello',
@@ -8,7 +8,7 @@ import { EnviandoInfomacoes } from '../../services/enviando-infomacoes';
   styleUrl: './hello.css',
 })
 export class Hello {
-  private enviaInfo = inject(EnviandoInfomacoes);
+  private enviaInfo = inject(AuthService);
   nome = "Bernardo";
   conte = 1;
   titulo = false;
@@ -27,8 +27,8 @@ export class Hello {
     this.titulo = true;
   }
 
-  enviandoInfo() {
-    this.enviaInfo.enviandoInfoParaBack("OLA");
-  }
+  // enviandoInfo() {
+  //   this.enviaInfo.LoginRequest("OLA");
+  // }
 
 }

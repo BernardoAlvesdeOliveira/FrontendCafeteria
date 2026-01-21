@@ -1,16 +1,18 @@
-<main class="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-slate-100">
+<main class="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-slate-100 ">
 
   <!-- Left Section -->
-  <section class="hidden md:flex flex-col justify-center items-center bg-gradient-to-br from-orange-700 to-orange-950 text-white p-12">
+  <section class="hidden md:flex flex-col justify-center items-center
+                  bg-gradient-to-br from-orange-700 to-orange-950 text-white p-1">
     <img 
       src="/assets/svg/ilustration.png" 
       alt="Imagem ilustrativa" 
-      class="w-104 h-96 mb-8 object-contain"
+      class="w-104 h-96 mb-8 object-contain enter-container" animate.enter="enter-animation"
     />
   </section>
 
   <!-- Right Section -->
-   <section class="flex flex-col justify-center items-center px-6 py-12 bg-white shadow-lg">
+   <section class="flex flex-col justify-center items-center px-6 py-12
+                  bg-white shadow-lg enter-container" animate.enter="enter-animation">
     <img 
       src="/assets/svg/logo.jpg" 
       alt="Logo" 
@@ -80,7 +82,14 @@
       <div class="flex-1 h-px bg-slate-300"></div>
     </div>
 
-    <button class="w-full max-w-xs border border-orange-800 text-orange-800 py-2 rounded-lg font-medium hover:bg-blue-50 transition">
+    <button 
+      class="
+      btn w-full max-w-xs border border-orange-800
+      text-orange-800 py-2 rounded-lg font-medium
+      hover:bg-blue-50 transition"
+      routerLink="/signup"
+      type="button"
+    >
       Cadastre-se
     </button>
   </section>

@@ -10,7 +10,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/components/login-layout/login-layout.ts"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]
