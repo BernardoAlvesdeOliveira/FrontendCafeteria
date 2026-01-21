@@ -4,19 +4,37 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class Auth {
-
-  private loggedIn = signal(false);
   
-  isAuthenticated(): boolean {
-    return this.loggedIn();
-  }
+  private tokenKey = 'auth_token';
 
-  login() {
-    this.loggedIn.set(true);
+  login(token: string) {
+    localStorage.setItem(this.tokenKey, token);
   }
 
   logout() {
-    this.loggedIn.set(false);
+    localStorage.removeItem(this.tokenKey);
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem(this.tokenKey);
+
+    if (!token) {
+      return false;
+    }
+
+    return !this.isTokenExpired(token);
+  }
+
+  private isTokenExpired(token: string): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const exp = payload.exp;
+      const now = Math.floor(Date.now() / 1000);
+
+      return exp < now;
+    } catch {
+      return true;
+    }
   }
 
 }

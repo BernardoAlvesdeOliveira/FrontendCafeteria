@@ -1,4 +1,6 @@
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Auth } from '../../auth';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -21,10 +23,21 @@ export class AuthAccount {
 
   private apiUrl = 'http://100.68.183.57:8080';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private auth: Auth,
+    private router: Router
+  ) {}
 
-  login(data: LoginRequest): Observable<boolean> {
-    return this.http.post<boolean>(
+  // login(data: LoginRequest): Observable<boolean> {
+  //   return this.http.post<boolean>(
+  //     `${this.apiUrl}/user/login`,
+  //     data
+  //   );
+  // }
+
+  login(data: LoginRequest): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(
       `${this.apiUrl}/user/login`,
       data
     );

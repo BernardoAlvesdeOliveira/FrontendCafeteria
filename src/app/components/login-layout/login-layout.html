@@ -23,10 +23,35 @@
       Acesse sua conta
     </h2>
 
+    @if (errorMessage()) {
+      <div
+        class="w-full max-w-xs mb-4 flex items-start gap-3
+              rounded-lg border border-red-200 bg-red-50
+              px-4 py-3 text-red-700 text-sm"
+        role="alert"
+      >
+        <svg
+          class="w-5 h-5 mt-0.5 text-red-600"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v2m0 4h.01M4.93 4.93l14.14 14.14"
+          />
+        </svg>
+
+        <span>{{ errorMessage() }}</span>
+      </div>
+    }
+
     <form 
       class="flex flex-col items-center w-full mb-4"
       [formGroup]="loginForm"
-      (ngSubmit)="enviarFormulario()"
+      (ngSubmit)="login()"
     >
       <div class="w-full max-w-xs">
         <input 
@@ -70,9 +95,16 @@
 
       <button 
         type="submit"
-        class="w-full max-w-xs bg-orange-800 text-white py-2 rounded-lg font-medium hover:bg-orange-950 transition"
+        [disabled]="loading()"
+        class="w-full max-w-xs bg-orange-800 text-white py-2 rounded-lg font-medium
+              hover:bg-orange-950 transition
+              disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Entrar
+        @if (loading()) {
+          Entrando...
+        } @else {
+          Entrar
+        }
       </button>
     </form>
 

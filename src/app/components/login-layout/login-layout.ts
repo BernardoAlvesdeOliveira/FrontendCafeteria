@@ -1,9 +1,9 @@
+import { Auth } from '../../services/auth';
 import { Component, signal } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from '../../services/auth/auth';
-import { RouterLink } from '@angular/router'; 
+import { AuthAccount } from '../../services/auth/auth-account/auth-account';
+import { RouterLink, Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-login-layout',
@@ -14,12 +14,19 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 })
 export class LoginLayout {
 
-  loginForm: FormGroup;
+  errorMessage = signal<string | null>(null);
+  loading = signal(false);
+  loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private authAccount: AuthAccount,
+    private auth: Auth,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required, Validators.minLength(6)]]
+      senha: ['', [Validators.required]]
     });
   }
 
@@ -27,34 +34,41 @@ export class LoginLayout {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   }
+  
+  login() {
 
-  enviarFormulario() {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return
-    }
-
-    const email = this.loginForm.value.email;
-    const senha = this.loginForm.value.senha;
-
-    if (!this.emailValido(email)) {
-      console.error('Senha inválida');
+    if (!this.emailValido(this.loginForm.value.email)) {
+      console.log("Erro no email")
       return;
     }
 
-    // Enviar para API
-    this.authService.login({
-      email: email,
-      password: senha
-    }).subscribe({
-      next: (response) => {
-        console.log('Resposta da API:', response);
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    this.loading.set(true);
+    this.errorMessage.set(null);
+
+    this.authAccount.login(this.loginForm.value).subscribe({
+      next: response => {
+        this.auth.login(response.token);
+        this.router.navigate(['/profile']);
       },
-      error: (err) => {
-        console.error('Erro na requisição', err);
+      error: err => {
+        this.loading.set(false);
+
+        if (err.status === 401 || err.status === 403) {
+          this.errorMessage.set(
+            'Email ou senha incorretos. Verifique os dados e tente novamente.'
+          );
+        } else {
+          this.errorMessage.set(
+            'Erro ao tentar acessar sua conta. Tente novamente mais tarde.'
+          );
+        }
       }
     });
-
   }
 
 }
